@@ -1,8 +1,11 @@
 import React from "react";
 import { MoralisProvider } from "react-moralis";
+import { MoralisDappProvider } from "./providers/MoralisDappProvider/MoralisDappProvider";
 import Moralis from "moralis/react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { ApplicationProvider } from "@ui-kitten/components";
 import { enableViaWalletConnect } from "./Moralis/enableViaWalletConnect";
+import * as eva from "@eva-design/eva";
 import WalletConnectProvider, {
   WalletConnectProviderProps,
 } from "./WalletConnect";
@@ -19,8 +22,8 @@ const { scheme } = expo;
 /**
  * Initialization of Moralis
  */
-const appId = "lDKPbigRWC5SeICLqRhMvEO8TOGvC73Ny8abmAXu";
-const serverUrl = "https://rdozj2jalcte.usemoralis.com:2053/server";
+const appId = "FQFdx9WdC5Oim6wJICuNSkd7zVWPQajw9HzpFOTE";
+const serverUrl = "https://cy56k1qgaoe5.usemoralis.com:2053/server";
 const environment = "native";
 // Initialize Moralis with AsyncStorage to support react-native storage
 Moralis.setAsyncStorage(AsyncStorage);
@@ -54,8 +57,13 @@ export const Providers = ({ children }: ProvidersProps) => {
       <MoralisProvider
         appId={appId}
         serverUrl={serverUrl}
-        environment={environment}>
-        {children}
+        environment={environment}
+      >
+        <MoralisDappProvider>
+          <ApplicationProvider {...eva} theme={eva.light}>
+            {children}
+          </ApplicationProvider>
+        </MoralisDappProvider>
       </MoralisProvider>
     </WalletConnectProvider>
   );

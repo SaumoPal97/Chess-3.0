@@ -58,3 +58,4 @@ buck-out/
 *.jsbundle
 
 .expo
+ios/Pods/
